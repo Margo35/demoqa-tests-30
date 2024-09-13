@@ -36,26 +36,21 @@ public class TextBoxTests {
         $("#subjectsInput").setValue("Comp").pressEnter();
         $("#dateOfBirthInput").click();
         Selenide.executeJavaScript("document.getElementById('dateOfBirthInput').value=''");
-        sleep(7000);
         $("#dateOfBirthInput").setValue("01 Jul 1990").pressEnter();
-        sleep(7000);
         $("[for='hobbies-checkbox-2']").click();
         $("[for='hobbies-checkbox-3']").click();
         $("#uploadPicture").uploadFromClasspath("cat.jpg");
         $("#currentAddress").setValue("75 PARK PLACE 8TH FLOOR NEW YORK");
-        $("#state").scrollTo().click();
+        $("#state").click();
         $("#react-select-3-input").setValue("Har").pressEnter();
         $("#city").scrollTo().click();
         $("#react-select-4-input").setValue("Karn").pressEnter();
         $("#submit").scrollTo().click();
-        $(".modal-content").should(appear).shouldHave(text("Thanks for submitting the form"));
+        $(".modal-content").should(appear);
+        $(".modal-content").shouldHave(text("Thanks for submitting the form"));
         $(".table-responsive").shouldHave(text("Adam Brown"), text("brown.adam@gmail.com"),
                 text("Male"), text("7908455879"), text("01 July,1990"), text("Computer Science"), text("Reading, Music"),
                 text("cat.jpg"), text("75 PARK PLACE 8TH FLOOR NEW YORK"), text("Haryana Karnal"));
-
-        //, text("brown.adam@gmail.com"),
-        //                text("7908455879"), text("12 July,202401"), text("Computer Science"), text("Reading, Music"),
-        //                text("cat.jpg"), text("75 PARK PLACE 8TH FLOOR NEW YORK"), text("Haryana Karnal")
 
     }
 
