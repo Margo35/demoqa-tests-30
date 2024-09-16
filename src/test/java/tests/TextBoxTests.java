@@ -48,9 +48,16 @@ public class TextBoxTests {
         $("#submit").scrollTo().click();
         $(".modal-content").should(appear);
         $(".modal-content").shouldHave(text("Thanks for submitting the form"));
-        $(".table-responsive").shouldHave(text("Adam Brown"), text("brown.adam@gmail.com"),
-                text("Male"), text("7908455879"), text("01 July,1990"), text("Computer Science"), text("Reading, Music"),
-                text("cat.jpg"), text("75 PARK PLACE 8TH FLOOR NEW YORK"), text("Haryana Karnal"));
+        $(".table-responsive").shouldHave(text("Adam Brown"));
+        $(".table-responsive").shouldHave(text("brown.adam@gmail.com"));
+        $(".table-responsive").shouldHave(text("Male"));
+        $(".table-responsive").shouldHave(text("7908455879"));
+        $(".table-responsive").shouldHave(text("01 July,1990"));
+        $(".table-responsive").shouldHave(text("Computer Science"));
+        $(".table-responsive").shouldHave(text("Reading, Music"));
+        $(".table-responsive").shouldHave(text("cat.jpg"));
+        $(".table-responsive").shouldHave(text("75 PARK PLACE 8TH FLOOR NEW YORK"));
+        $(".table-responsive").shouldHave(text("Haryana Karnal"));
 
     }
 
