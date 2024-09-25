@@ -10,7 +10,8 @@ public class TextBoxTests extends TestBase {
     @Test
     void successFillFormTest() {
 
-        registrationPage.openPage()
+        registrationPage.openPage().openPage()
+                .removeBanner()
                 .setFirstName("Adam")
                 .setLastName("Brown")
                 .setUserEmail("brown.adam@gmail.com")
@@ -23,6 +24,7 @@ public class TextBoxTests extends TestBase {
                 .setCurrentAddress("75 PARK PLACE 8TH FLOOR NEW YORK")
                 .setStateAndCity("Har", "Karn")
                 .clickSubmit();
+
     }
 
     @Test
