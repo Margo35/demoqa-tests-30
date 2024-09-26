@@ -2,6 +2,7 @@ package page;
 
 import com.codeborne.selenide.SelenideElement;
 import page.components.CalendarComponent;
+import page.components.ResultTable;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Condition.text;
@@ -24,10 +25,8 @@ public class RegistrationPage {
             stateInput = $("#react-select-3-input"),
             city = $("#city"),
             cityInput = $("#react-select-4-input"),
-            userForm = $("#userForm"),
             modalContent = $(".modal-content"),
-            tableResponse = $(".table-responsive");
-
+            modalDialog = $(".modal-dialog");
 
     CalendarComponent calendarComponent = new CalendarComponent();
 
@@ -109,23 +108,16 @@ public class RegistrationPage {
         return this;
     }
 
-    public void visibleCheck() {
-        userForm.shouldBe(visible);
+    public void modalDialogCheck() {
+        modalDialog.shouldNot(appear);
     }
 
-    public void resultCheck() {
+    public RegistrationPage checkResult(String key, String value) {
         modalContent.should(appear);
         modalContent.shouldHave(text("Thanks for submitting the form"));
-        tableResponse.shouldHave(text("Adam Brown"));
-        tableResponse.shouldHave(text("brown.adam@gmail.com"));
-        tableResponse.shouldHave(text("Male"));
-        tableResponse.shouldHave(text("7908455879"));
-        tableResponse.shouldHave(text("01 July,1990"));
-        tableResponse.shouldHave(text("Computer Science"));
-        tableResponse.shouldHave(text("Reading"));
-        tableResponse.shouldHave(text("cat.jpg"));
-        tableResponse.shouldHave(text("75 PARK PLACE 8TH FLOOR NEW YORK"));
-        tableResponse.shouldHave(text("Haryana Karnal"));
+
+        new ResultTable().checkResult(key, value);
+        return this;
     }
 
 
