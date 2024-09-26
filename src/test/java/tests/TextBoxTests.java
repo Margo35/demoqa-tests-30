@@ -50,7 +50,7 @@ public class TextBoxTests extends TestBase {
 
 
     @Test
-    void requiredFieldsCheck() {
+    void requiredFieldsCheckTest() {
         registrationPage.openPage()
                 .removeBanner()
                 .setFirstName("Adam")
