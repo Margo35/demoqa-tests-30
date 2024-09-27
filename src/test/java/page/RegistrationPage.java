@@ -57,8 +57,8 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage setGender() {
-        gender.click();
+    public RegistrationPage setGender(String value) {
+        $(value).click();
         return this;
     }
 
@@ -80,8 +80,8 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage setHobbies() {
-        readingHobbiesCheckbox.click();
+    public RegistrationPage setHobbies(String value) {
+        $(value).click();
         return this;
     }
 
@@ -110,6 +110,24 @@ public class RegistrationPage {
 
     public void modalDialogCheck() {
         modalDialog.shouldNot(appear);
+    }
+
+    public String getResultGender(String gender) {
+        return switch (gender) {
+            case "[for='gender-radio-1']" -> "Male";
+            case "[for='gender-radio-2']" -> "Female";
+            case "[for='gender-radio-3']" -> "Other";
+            default -> throw new IllegalStateException("Unexpected value: " + gender);
+        };
+    }
+
+    public String getResultHobbies(String hobbies) {
+        return switch (hobbies) {
+            case "[for='hobbies-checkbox-1']" -> "Sports";
+            case "[for='hobbies-checkbox-2']" -> "Reading";
+            case "[for='hobbies-checkbox-3']" -> "Music";
+            default -> throw new IllegalStateException("Unexpected value: " + hobbies);
+        };
     }
 
     public RegistrationPage checkResult(String key, String value) {
