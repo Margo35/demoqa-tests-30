@@ -1,7 +1,12 @@
 package tests;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
+import org.junit.jupiter.params.provider.EnumSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import page.RegistrationPage;
+import tests.data.Gender;
 import utils.RandomUtils;
 
 public class TextBoxTests extends TestBase {
@@ -82,5 +87,56 @@ public class TextBoxTests extends TestBase {
                 .checkResult("Gender", resultGender)
                 .checkResult("Mobile", phoneNumber);
 
+    }
+
+    @ValueSource(strings = {
+            "7904587489","7959614557","7916143111"
+    })
+    @ParameterizedTest(name = "Успешная регистрация под мобильным номером {0}")
+    void successfulRegistrationWithDifferentMobileTest(String mobileNumber) {
+        registrationPage.openPage()
+                .removeBanner()
+                .setFirstName(firstName)
+                .setLastName(lastName)
+                .setGender(gender)
+                .setuserNumber(mobileNumber)
+                .clickSubmit();
+
+        registrationPage.checkResult("Student Name", firstName + " " + lastName)
+                .checkResult("Gender", resultGender)
+                .checkResult("Mobile", mobileNumber);
+    }
+
+    @CsvFileSource(resources = "/test_data/students.csv")
+    @ParameterizedTest(name = "Успешная регистрация под студентом {0} {1}")
+    void successfulRegistrationWithDifferentStudentsTest(String firstName,String lastName, String gender, String mobileNumber) {
+        registrationPage.openPage()
+                .removeBanner()
+                .setFirstName(firstName)
+                .setLastName(lastName)
+                .setGender(gender)
+                .setuserNumber(mobileNumber)
+                .clickSubmit();
+
+        registrationPage.checkResult("Student Name", firstName + " " + lastName)
+                .checkResult("Gender", resultGender)
+                .checkResult("Mobile", mobileNumber);
+    }
+
+    @EnumSource(Gender.class)
+    @ParameterizedTest(name = "Успешная регистрация с гендером {0}")
+    void successfulRegistrationWithDifferentGenderTest(Gender gender) {
+        resultGender = registrationPage.getResultGender(gender.description);
+        registrationPage.openPage()
+                .removeBanner()
+                .setFirstName(firstName)
+                .setLastName(lastName)
+                .setGender(gender.description)
+                .setuserNumber(phoneNumber)
+                .clickSubmit();
+
+        registrationPage.checkResult("Student Name", firstName + " " + lastName)
+                .checkResult("Gender", resultGender)
+                .checkResult("Mobile", phoneNumber);
     }
 }
