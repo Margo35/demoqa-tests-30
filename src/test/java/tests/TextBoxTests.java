@@ -1,5 +1,7 @@
 package tests;
 
+import helpers.Attach;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
@@ -30,6 +32,11 @@ public class TextBoxTests extends TestBase {
             resultGender = registrationPage.getResultGender(gender),
             //resultDateOfBirth = registrationPage.getResultDateOfBirth(dateOfBirth),
             resultHobbies = registrationPage.getResultHobbies(hobbies);
+
+    @AfterEach
+    void addAttachments() {
+        Attach.screenshotAs("Last screenshot");
+    }
 
     @Test
     void successFillFormTest() {
