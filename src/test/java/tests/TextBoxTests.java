@@ -36,6 +36,9 @@ public class TextBoxTests extends TestBase {
     @AfterEach
     void addAttachments() {
         Attach.screenshotAs("Last screenshot");
+        Attach.pageSource();
+        Attach.browserConsoleLogs();
+        Attach.addVideo();
     }
 
     @Test
